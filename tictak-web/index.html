@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Крестики Нолики</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/loader.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  </head>
+
+
+<body>
+
+  <div class="preloader">
+    <div class="preloader__row">
+      <div class="preloader__item"></div>
+      <div class="preloader__item"></div>
+    </div>
+  </div>
+  <header><p class='nameOfGame'>Крестики Нолики</p></header>
+
+    <div id="app">
+    <div v-if="openSetting" class='fullScreenSetting'>
+      <h1>Настройки</h1>
+      <div class="fullScreenSetting__item"><div>Режим игры:</div><div class="mode" v-on:click="mode=!mode"><div :class="[{ 'active': mode},'rp']">rp</div><div :class="[{ 'active': !mode},'ai']">ai</div></div></div>
+      <div class="fullScreenSetting__item"><p v-on:click="darkmode=!darkmode">Сменить тему</p></div>
+    </div>
+    <div class="setting"  v-if="!wait && !gameOver && sign==-1 && !smallScreen">
+    <div class="mode" v-on:click="mode=!mode"><div :class="[{ 'active': mode},'rp']">rp</div><div :class="[{ 'active': !mode},'ai']">ai</div></div>
+    <div class="darkmode" v-on:click="darkmode=!darkmode">
+      <svg viewBox="0 0 24 24">
+        <path fill="currentColor" d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.36,12.31 6.2,9.5 6.04,6.68C3.23,9.82 3.34,14.64 6.35,17.66C9.37,20.67 14.19,20.78 17.33,17.97Z" />
+      </svg>
+    </div>
+    </div>
+    <div v-else-if="smallScreen" class="setting small-screen">
+      <div v-on:click="openSetting=!openSetting">
+        <svg viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+        </svg>
+      </div>
+    </div>
+    <div id="userHelper">
+    <transition name="fade" >
+    <div key="ready" v-if='!wait && !gameOver && sign==-1'>Нажмите готов</div>
+    <div key="wait" v-else-if='wait && !gameOver && sign==-1'>Ожидание соперника...</div>
+    <div key="reconn" v-else-if='!oppInGame && timing<=9'>Соперник переподключается... {{timing}}</div>
+    <div key="oppGam" v-else-if='!gambit && !gameOver'>Ход соперника</div>
+    <div key="yourGam" v-else-if='gambit && !gameOver'>Твой ход</div>
+    <div key="gameover" v-else-if='gameOver!=false'>
+      <p class=restartBlock>
+      <button v-on:click="restartGame" class="restartButton"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M2 12C2 16.97 6.03 21 11 21C13.39 21 15.68 20.06 17.4 18.4L15.9 16.9C14.63 18.25 12.86 19 11 19C4.76 19 1.64 11.46 6.05 7.05C10.46 2.64 18 5.77 18 12H15L19 16H19.1L23 12H20C20 7.03 15.97 3 11 3C6.03 3 2 7.03 2 12Z" /></svg> </button>
+      {{gameOver}}</p>
+    </div>
+    </transition>
+    </div>
+    <table>
+      <transition name="fade-button"><caption><div v-if='oppInGame && !wait && !gameOver && sign!=-1 && timeGambit>=0 && fakeTime>=0'><span id="timer">Осталось на ход: <span v-if="gambit">{{("0"+timeGambit).substr(-2)}}</span><span v-else-if="!gambit">{{("0"+fakeTime).substr(-2)}}</span></span></div><div v-else>&nbsp</div></caption></transition>
+      <tr><td id='i0'>{{gamers[cells[0]]}}</td><td id='i1'>{{gamers[cells[1]]}}</td><td id='i2'>{{gamers[cells[2]]}}</td></tr>
+      <tr><td id='i3'>{{gamers[cells[3]]}}</td><td id='i4'>{{gamers[cells[4]]}}</td><td id='i5'>{{gamers[cells[5]]}}</td></tr>
+      <tr><td id='i6'>{{gamers[cells[6]]}}</td><td id='i7'>{{gamers[cells[7]]}}</td><td id='i8'>{{gamers[cells[8]]}}</td></tr>
+  </table>
+
+  <transition name="fade-button">
+      <button type="submit" id="submit" class='readyButton' v-if="idroom.length==0" v-on:click="ready">Готов!</button>
+  </transition>
+  </div>
+
+  <script type="text/javascript" src="js/loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+  <script src="js/client.js"></script>
+  <script src="js/ai.js"></script>
+</body>
+</html>

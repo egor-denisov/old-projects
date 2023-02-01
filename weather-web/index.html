@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather</title>
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/loader.css">
+  <link rel="icon" href="img/icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+  <script src="https://use.fontawesome.com/8343b8a810.js"></script>
+</head>
+<body>
+  <div class="preloader">
+    <div class="preloader__row">
+      <div class="preloader__item"></div>
+      <div class="preloader__item"></div>
+    </div>
+  </div>
+  <div id="app">
+  <h1 class="title">getWheather</h1>
+  <input placeholder="Write the country..." id='searchCountry' list="selectCountry" v-model="sCountry" autocomplete="off">
+  <datalist id='selectCountry' v-if="sCountry.length>=3 && keyCountry">
+    <option v-for="(item,index) in listCountry" :key="index">{{item}}</option>
+  </datalist>
+  <input placeholder="Write the city..." id='searchCity' list="selectCity" v-model="sCity" autocomplete="off">
+  <datalist id='selectCity' v-if="sCity.length>=3 && keyCity">
+    <option v-for="(item,index) in listCity" :key="index">{{item}}</option>
+  </datalist>
+  <div id='wheatherGroup'>
+    <div class='content'>
+      <div class='infoWheather'>
+        <i class="fa fa-map-marker" aria-hidden="true"></i> Place: <span id="place"></span><br>
+        <span id="time"></span>
+      </div>
+      <div class="infoWheather">
+        <p class='card is-half'>Temperature: <span id="temp"></span>°C</p>
+        <p class='card is-half'>Feels like: <span id="feelTemp"></span>°C</p>
+        <p class='card is-half'>Pressure: <span id="pres"></span> mm Hg</p>
+        <p class='card is-half'>Humidity: <span id="hum"></span>%</p>
+        <p class='card is-half'>Wind:  <span id="wind"></span> m/s</p>
+        <p class='card is-half'>Clouds: <span id="clouds"></span></p>
+      </div>
+    </div>
+    <div class='map'>
+      <iframe id='mapCity' frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=29.0%2C49.0%2C31.0%2C50.0&amp;layer=mapnik" style="border: none"></iframe>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript" src='js/loader.js'></script>
+<script type="text/javascript" src='js/client.js'></script>
+<script type="text/javascript" src="countries/countries.js"></script>
+<script type="text/javascript" src='js/client-vue.js'></script>
+
+</body>
+</html>

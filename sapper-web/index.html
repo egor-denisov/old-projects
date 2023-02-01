@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="img/icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>Sapper</title>
+</head>
+<body oncontextmenu="return false;">
+  <header>
+      s<svg viewBox="0 0 24 24"><path fill="currentColor" d="M23,13V11H19.93C19.75,9.58 19.19,8.23 18.31,7.1L20.5,4.93L19.07,3.5L16.9,5.69C15.77,4.81 14.42,4.25 13,4.07V1H11V4.07C9.58,4.25 8.23,4.81 7.1,5.69L4.93,3.5L3.5,4.93L5.69,7.1C4.81,8.23 4.25,9.58 4.07,11H1V13H4.07C4.25,14.42 4.81,15.77 5.69,16.9L3.5,19.07L4.93,20.5L7.1,18.31C8.23,19.19 9.58,19.75 11,19.93V23H13V19.93C14.42,19.75 15.77,19.19 16.9,18.31L19.07,20.5L20.5,19.07L18.31,16.9C19.19,15.77 19.75,14.42 19.93,13H23M12,8A4,4 0 0,0 8,12H6A6,6 0 0,1 12,6V8Z" /></svg>pper
+  </header>
+<div id="app">
+<div id="setting" v-if="!gameStarted">
+<div class="valueSlider" >Size Map: <span>{{mapSizes[choosedSize][0]}} x {{mapSizes[choosedSize][1]}}</span></div>
+<input v-model="choosedSize" type="range" id="CountBomb" min="0" max="2" value="1" step="1">
+
+<div class="valueSlider">Count Bomb: <span>{{tweenedNumber}}</span></div>
+<input v-model="countOfBomb" type="range" id="CountBomb" v-bind:min="Math.floor(0.5*mapSizes[choosedSize][2])" v-bind:max="Math.floor(1.5*mapSizes[choosedSize][2])" v-bind:step="Math.floor(0.5*mapSizes[choosedSize][2])">
+<button v-on:click="startGame" class='startBotton'>Start Game</button>
+</div>
+
+<div id="game" v-if="gameStarted">
+<div id="restart"><span id="resultGame" v-if="result==false">Open cells:{{openCell.length}}/{{size_x*size_y-countOfBomb}}</span><div v-else><button v-on:click="restartGame">
+  <svg viewBox="0 0 24 24">
+    <path fill="currentColor" d="M2 12C2 16.97 6.03 21 11 21C13.39 21 15.68 20.06 17.4 18.4L15.9 16.9C14.63 18.25 12.86 19 11 19C4.76 19 1.64 11.46 6.05 7.05C10.46 2.64 18 5.77 18 12H15L19 16H19.1L23 12H20C20 7.03 15.97 3 11 3C6.03 3 2 7.03 2 12Z" />
+</svg>
+</button><span>{{result}}</span></div></div>
+<table>
+  <tr v-for="y in size_y">
+    <td v-bind:style="{width:((screenSize*k)/size_x).toFixed(2)+'px',height:((screenSize*k)/size_x).toFixed(2)+'px',fontSize:((screenSize*k)/size_x).toFixed(0)*0.53+'px'}" v-for="x in size_x" :id="'c'+(x-1).toString()+'_'+(y-1).toString()">
+      <div id="cell"  v-on:click.right="flag(x-1,y-1)" >
+        <button v-on:click="checkCell([[x-1,y-1]])"><p>&nbsp;</p></button>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src='js/client.js'></script>
+<script src='js/client-vue.js'></script>
+</body>
+</html>

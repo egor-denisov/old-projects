@@ -1,0 +1,15 @@
+{
+  "name": "sapper-desktop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^17.0.1",
+    "require": "^2.4.20"
+  },
+  "author": "",
+  "license": "ISC"
+}

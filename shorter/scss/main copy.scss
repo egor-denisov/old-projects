@@ -1,0 +1,118 @@
+$pewter-blue: #93b7beff;
+$mint-cream: #f1fffaff;
+$granite-gray: #625f63ff;
+$red-munsell: #f21b3fff;
+$raisin-black: #1a181bff;
+$width-input:480px;
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Fredoka', sans-serif;
+}
+body{
+    background-color: $mint-cream;
+    color: $raisin-black;
+}
+.header{
+    border-bottom: 2px solid $pewter-blue;
+    margin-bottom: 20px;
+    .name{
+        font-size: 90px;
+        text-align: center;
+        color:$pewter-blue;
+    }
+}
+
+.main{
+    text-align: center;
+    font-size: 32px;
+}
+input,button{
+    border: 2px solid $granite-gray;
+    margin-top: 20px;
+    font-size: 28px;
+    color:$granite-gray;
+}
+.input{
+    background-color: $mint-cream;
+    padding: 20px 40px 20px 20px;
+}
+
+.btn{
+    background-color: $pewter-blue;
+    padding: 20px;
+    opacity: 1;
+    cursor: pointer;
+}
+.btn_disabled{
+    opacity: 0.5;
+    cursor: auto;
+}
+.btn_clr{
+    padding: 20px 10px;
+    border-left:none;
+    background-color: $mint-cream;
+    cursor: pointer;
+    min-width: 40px;
+}
+.link {
+    margin-bottom: 20px;
+    .input{
+        border-radius: 20px 0px 0px 20px;
+        border-right: none;
+        outline:none;
+        width:$width-input*0.75;
+    }
+    .btn{
+        border-radius: 0px 20px 20px 0px;
+        border-left: none;
+        min-width:$width-input*0.17;
+    }   
+}
+.result {
+    .input{
+        border-radius: 20px 0px 0px 20px;
+        border-right: none;
+        min-width:$width-input*0.92;
+    }
+    .btn_clr{
+        border-radius: 0px 20px 20px 0px;
+        border-left: none;
+    } 
+}
+.alert{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    .content{
+        background-color: $mint-cream;
+        padding: 50px 80px;
+        max-width: $width-input*1.5;
+        height:260px;
+        border: 2px solid $granite-gray;
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        margin: 10% auto;
+        position: sticky;
+        h1{
+            font-size: 48px;
+            font-weight: 800;
+        }
+        .type_of_alert{
+            padding:10px 0px;
+            font-size: 32px;
+        }
+        .close{
+            font-size: 64px;
+            color:$granite-gray;
+            position: absolute;
+            right: 10px;
+            top:-20px;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,188 @@
+*{
+  font-family: 'Comfortaa';
+  color:#656C74;
+}
+header .nameOfGame{
+  font-size: 4rem;
+  padding-top: 30px;
+}
+body{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+table{
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #C5D1E1;
+  margin-top: 10px;
+}
+td{
+  border: 2px solid black;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  font-size: 32px;
+  background-color: white;
+  transition: background 0.2s ease;
+}
+table caption{
+  caption-side: bottom;
+  font-size: 12px;
+  text-align: right;
+}
+.readyButton{
+  font-size: 2rem;
+  border: 2px #656C74 solid;
+  border-radius: 0.5rem;
+  background: #C5D1E1;
+  margin-top: 4vh;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+#userHelper{
+  height: 50px;
+  padding-top: 0px;
+  font-size: 32px;
+  vertical-align: middle
+}
+.restartButton{
+  background: transparent;
+  border:none;
+  cursor: pointer;
+}
+.restartButton svg{
+  width: 32px;
+  height: 32px;
+  position: relative;
+  top: 4px;
+}
+.restartButton svg:hover{
+  animation: 1s spin linear;
+}
+@keyframes spin {
+    100% { transform: rotate(370deg); }
+}
+.fade-enter-active, .fade-button-enter-active, .fade-button-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-button-enter, .fade-button-leave-to{
+  opacity: 0;
+}
+.setting{
+  display: table;
+  position: absolute;
+  right:10px;
+  top:10px;
+  cursor: pointer;
+  width: 120px;
+  height: 48px;
+}
+.setting .darkmode, .setting .exit,.mode{
+  display: table-cell;
+}
+.setting svg{
+  height: 48px;
+  width: 48px;
+}
+svg path{
+  fill:#656C74;
+  transition: fill 0.4s ease;
+}
+.setting .darkmode:hover svg path,.setting .exit:hover  svg path{
+  fill:#C5D1E1;
+}
+
+.mode{
+  height: 48px;
+  width: 96px;
+  border:1px solid #C5D1E1;
+  border-radius: 3%;
+  font-size: 28px;
+  display: table;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.mode *{
+  transition: background 0.2s ease;
+  display: table-cell;
+  vertical-align: middle;
+  width: 50%;
+  height: 100%;
+
+}
+.mode .active{
+  background: #C5D1E1 ;
+  color:white;
+}
+.small-screen{
+  width: auto;
+}
+.fullScreenSetting{
+  position: absolute;
+  background: white;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.fullScreenSetting *{
+  color: #656C74;
+  font-size: 2rem;
+}
+.fullScreenSetting h1{
+  font-size: 3rem;
+}
+.fullScreenSetting__item{
+  text-align: center;
+  width: 100%;
+}
+.fullScreenSetting__item p{
+  cursor: pointer;
+  margin-top: 30px;
+}
+.fullScreenSetting__item p :hover{
+  text-decoration: underline;
+}
+.fullScreenSetting__item .mode{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+/*DARKMODE*/
+.dm{
+  background: #21252B;
+}
+.dm .preloader{
+  background: #21252B;
+}
+.dm .preloader__item{
+  background: #656C74;
+}
+.dm table td, .dm .readyButton{
+  background-color: #282C34;
+}
+.dm .readyButton{
+  border-color: #C5D1E1;
+}
+.dm table caption *{
+  color:#C5D1E1;
+}
+.dm .mode .active{
+  background:#656C74;
+}
+.dm svg path{
+  fill:#C5D1E1;
+}
+.dm .setting .darkmode:hover svg path,.dm .setting .exit:hover  svg path{
+  fill:white;
+}
+.dm .fullScreenSetting{
+  background: #21252B;
+  color: #C5D1E1;
+}
